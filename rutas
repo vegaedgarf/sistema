@@ -1,0 +1,92 @@
+
+  GET|HEAD        / ....................................................................................... home
+  GET|HEAD        confirm-password .................. password.confirm › Auth\ConfirmablePasswordController@show
+  POST            confirm-password .................................... Auth\ConfirmablePasswordController@store
+  GET|HEAD        dashboard .......................................................................... dashboard
+  POST            email/verification-notification verification.send › Auth\EmailVerificationNotificationControl…
+  GET|HEAD        financial-reports .................. financial_reports.index › FinancialReportController@index
+  GET|HEAD        financial-reports/export/excel/{year}/{month} financial_reports.export.excel › FinancialRepor…
+  GET|HEAD        financial-reports/export/pdf/{year}/{month} financial_reports.export.pdf › FinancialReportCon…
+  GET|HEAD        financial-reports/generate/{year}/{month} financial_reports.generate › FinancialReportControl…
+  GET|HEAD        forgot-password ................... password.request › Auth\PasswordResetLinkController@create
+  POST            forgot-password ...................... password.email › Auth\PasswordResetLinkController@store
+  GET|HEAD        login ..................................... login › Auth\AuthenticatedSessionController@create
+  POST            login .............................................. Auth\AuthenticatedSessionController@store
+  POST            logout .................................. logout › Auth\AuthenticatedSessionController@destroy
+  GET|HEAD        member-activity ....................... member_activity.index › MemberActivityController@index
+  POST            member-activity ....................... member_activity.store › MemberActivityController@store
+  GET|HEAD        member-activity/create .............. member_activity.create › MemberActivityController@create
+  GET|HEAD        member-activity/data .................... member_activity.data › MemberActivityController@data
+  GET|HEAD        member-activity/{member_activity} ....... member_activity.show › MemberActivityController@show
+  PUT|PATCH       member-activity/{member_activity} ... member_activity.update › MemberActivityController@update
+  DELETE          member-activity/{member_activity} . member_activity.destroy › MemberActivityController@destroy
+  GET|HEAD        member-activity/{member_activity}/edit .. member_activity.edit › MemberActivityController@edit
+  GET|HEAD        members ............................................... members.index › MemberController@index
+  POST            members ............................................... members.store › MemberController@store
+  GET|HEAD        members/create ...................................... members.create › MemberController@create
+  GET|HEAD        members/{member} ........................................ members.show › MemberController@show
+  PUT|PATCH       members/{member} .................................... members.update › MemberController@update
+  DELETE          members/{member} .................................. members.destroy › MemberController@destroy
+  POST            members/{member}/contacts ........................... contacts.store › ContactController@store
+  GET|HEAD        members/{member}/contacts/create .................. contacts.create › ContactController@create
+  PUT             members/{member}/contacts/{contact} ............... contacts.update › ContactController@update
+  DELETE          members/{member}/contacts/{contact} ............. contacts.destroy › ContactController@destroy
+  GET|HEAD        members/{member}/contacts/{contact}/edit .............. contacts.edit › ContactController@edit
+  GET|HEAD        members/{member}/edit ................................... members.edit › MemberController@edit
+  GET|HEAD        members/{member}/health-record ............. health_records.show › HealthRecordController@show
+  POST            members/{member}/health-record ........... health_records.store › HealthRecordController@store
+  GET|HEAD        members/{member}/health-record/create .. health_records.create › HealthRecordController@create
+  PUT             members/{member}/health-record/{healthRecord} health_records.update › HealthRecordController@…
+  DELETE          members/{member}/health-record/{healthRecord} health_records.destroy › HealthRecordController…
+  GET|HEAD        members/{member}/health-record/{healthRecord}/edit health_records.edit › HealthRecordControll…
+  GET|HEAD        memberships ................................... memberships.index › MembershipController@index
+  POST            memberships ................................... memberships.store › MembershipController@store
+  GET|HEAD        memberships/create .......................... memberships.create › MembershipController@create
+  GET|HEAD        memberships/{membership} ........................ memberships.show › MembershipController@show
+  PUT|PATCH       memberships/{membership} .................... memberships.update › MembershipController@update
+  DELETE          memberships/{membership} .................. memberships.destroy › MembershipController@destroy
+  GET|HEAD        memberships/{membership}/edit ................... memberships.edit › MembershipController@edit
+  PUT             password .................................... password.update › Auth\PasswordController@update
+  GET|HEAD        payments ............................................ payments.index › PaymentController@index
+  POST            payments ............................................ payments.store › PaymentController@store
+  GET|HEAD        payments/create ................................... payments.create › PaymentController@create
+  GET|HEAD        payments/{payment} .................................... payments.show › PaymentController@show
+  PUT|PATCH       payments/{payment} ................................ payments.update › PaymentController@update
+  DELETE          payments/{payment} .............................. payments.destroy › PaymentController@destroy
+  GET|HEAD        payments/{payment}/edit ............................... payments.edit › PaymentController@edit
+  GET|HEAD        permissions ................................... permissions.index › PermissionController@index
+  POST            permissions ................................... permissions.store › PermissionController@store
+  GET|HEAD        permissions/create .......................... permissions.create › PermissionController@create
+  GET|HEAD        permissions/{permission} ........................ permissions.show › PermissionController@show
+  PUT|PATCH       permissions/{permission} .................... permissions.update › PermissionController@update
+  DELETE          permissions/{permission} .................. permissions.destroy › PermissionController@destroy
+  GET|HEAD        permissions/{permission}/edit ................... permissions.edit › PermissionController@edit
+  GET|HEAD        profile ................................................ profile.edit › ProfileController@edit
+  PATCH           profile ............................................ profile.update › ProfileController@update
+  DELETE          profile .......................................... profile.destroy › ProfileController@destroy
+  GET|HEAD        register ..................................... register › Auth\RegisteredUserController@create
+  POST            register ................................................. Auth\RegisteredUserController@store
+  POST            reset-password ............................. password.store › Auth\NewPasswordController@store
+  GET|HEAD        reset-password/{token} .................... password.reset › Auth\NewPasswordController@create
+  GET|HEAD        roles ..................................................... roles.index › RoleController@index
+  POST            roles ..................................................... roles.store › RoleController@store
+  GET|HEAD        roles/create ............................................ roles.create › RoleController@create
+  GET|HEAD        roles/{role} ................................................ roles.show › RoleController@show
+  PUT|PATCH       roles/{role} ............................................ roles.update › RoleController@update
+  DELETE          roles/{role} .......................................... roles.destroy › RoleController@destroy
+  GET|HEAD        roles/{role}/edit ........................................... roles.edit › RoleController@edit
+  GET|HEAD        storage/{path} ................................................................. storage.local
+  GET|HEAD        test-role .................................................................................... 
+  GET|HEAD        up ........................................................................................... 
+  GET|HEAD        users ..................................................... users.index › UserController@index
+  POST            users ..................................................... users.store › UserController@store
+  GET|HEAD        users/create ............................................ users.create › UserController@create
+  GET|HEAD        users/{user} ................................................ users.show › UserController@show
+  PUT|PATCH       users/{user} ............................................ users.update › UserController@update
+  DELETE          users/{user} .......................................... users.destroy › UserController@destroy
+  GET|HEAD        users/{user}/edit ........................................... users.edit › UserController@edit
+  GET|HEAD        verify-email .................... verification.notice › Auth\EmailVerificationPromptController
+  GET|HEAD        verify-email/{id}/{hash} .................... verification.verify › Auth\VerifyEmailController
+
+                                                                                             Showing [88] routes
+

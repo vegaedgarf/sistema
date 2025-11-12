@@ -1,0 +1,387 @@
+:root {
+    /* Colores Claros y Energéticos */
+    --color-light: #ffffff;
+    --color-section-bg: #f8f8f8;
+    --color-dark: #333333;
+    --color-gray: #666666;
+    
+    /* Acento principal (Verde Energía) */
+    --color-accent: #4CAF50; 
+    --color-accent-darker: #3e8e41;
+
+    --padding-section: 60px 0;
+    --border-radius-base: 8px;
+}
+
+/* ------------------- BASE ------------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    color: var(--color-dark);
+    background-color: var(--color-light);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+a {
+    color: var(--color-dark);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--color-accent); 
+}
+
+h1, h2, h3 {
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--color-dark);
+}
+
+h1 { font-size: 3.5rem; }
+h2 { font-size: 2.5rem; text-align: center; margin-bottom: 40px; }
+h3 { font-size: 1.8rem; }
+
+p {
+    margin-bottom: 15px;
+    color: var(--color-gray);
+}
+
+/* ------------------- BOTONES CTA ------------------- */
+.cta-button, .primary-cta, .secondary-cta {
+    display: inline-block;
+    padding: 12px 25px;
+    border-radius: var(--border-radius-base);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+}
+
+.cta-button, .primary-cta {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    box-shadow: 0 4px 10px rgba(76, 175, 80, 0.4);
+}
+
+.cta-button:hover, .primary-cta:hover {
+    background-color: var(--color-accent-darker);
+}
+
+.secondary-cta {
+    background-color: transparent;
+    border: 2px solid var(--color-accent);
+    color: var(--color-accent);
+    padding: 10px 23px;
+}
+
+.secondary-cta:hover {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+}
+
+/* ------------------- HEADER Y NAV RESPONSIVE ------------------- */
+header {
+    background-color: var(--color-light);
+    padding: 15px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Contenedor del logo <a> */
+.logo.logo-image-container {
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    z-index: 1000;
+}
+
+/* Imagen del logo <img> */
+.site-logo {
+    height: 50px; /* Tamaño del logo ajustado (puedes cambiarlo) */
+    width: auto;
+    transition: transform 0.3s ease;
+}
+.site-logo:hover {
+    transform: scale(1.05);
+}
+
+/* Menú de Navegación (Desktop) */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: var(--color-dark);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.nav-login a {
+    font-weight: 700;
+}
+
+/* Icono de Hamburguesa */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1000;
+}
+.menu-toggle .bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    margin: 4px auto;
+    background-color: var(--color-dark);
+    transition: all 0.3s ease-in-out;
+}
+.menu-toggle.is-open .bar:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.is-open .bar:nth-child(2) { opacity: 0; }
+.menu-toggle.is-open .bar:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+
+/* ------------------- SECCIÓN HERO ------------------- */
+.hero-section {
+    /* Ruta relativa desde /css/style.css hasta /images/hero-bg.jpg */
+    background: url('../images/hero-bg.jpg') no-repeat center center/cover;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.hero-section h1 {
+    color: var(--color-light);
+    font-size: 4.5rem;
+    line-height: 1.1;
+}
+
+.hero-section p {
+    color: var(--color-light);
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+}
+
+
+/* ------------------- SECCIÓN SERVICIOS (GRID) ------------------- */
+.services-section {
+    background-color: var(--color-section-bg);
+    padding: var(--padding-section);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background-color: var(--color-light);
+    border-radius: var(--border-radius-base);
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden; /* Importante para que la imagen respete los bordes */
+}
+
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para la imagen dentro de la tarjeta */
+.card-image {
+    width: 100%;
+    height: 200px; /* Altura fija para todas las imágenes */
+    object-fit: cover; /* Asegura que la imagen cubra sin deformarse */
+    display: block;
+}
+
+.service-card h3 {
+    color: var(--color-accent);
+    padding: 20px 20px 0 20px;
+    margin-bottom: 10px;
+}
+.service-card p {
+    padding: 0 20px 20px 20px;
+}
+
+.card-link {
+    font-weight: 600;
+    color: var(--color-accent);
+    display: block;
+    padding-bottom: 25px;
+}
+.card-link:hover {
+    color: var(--color-accent-darker);
+}
+
+
+/* ------------------- SECCIÓN TESTIMONIOS ------------------- */
+.testimonials-section {
+    text-align: center;
+    background-color: var(--color-light);
+    padding: var(--padding-section);
+}
+
+.testimonials-section blockquote {
+    font-size: 1.7rem;
+    font-style: italic;
+    color: var(--color-dark);
+    max-width: 800px;
+    margin: 0 auto 30px;
+    line-height: 1.4;
+    border-left: 5px solid var(--color-accent);
+    padding-left: 20px;
+    text-align: left;
+}
+
+
+/* ------------------- SECCIÓN CONTACTO/INFO ------------------- */
+.info-section {
+    background-color: var(--color-section-bg);
+    text-align: center;
+    padding: var(--padding-section);
+    border-top: 1px solid #e0e0e0;
+}
+
+.info-section address, .info-section time {
+    font-style: normal;
+    font-size: 1.2rem;
+    color: var(--color-gray);
+    margin-bottom: 10px;
+}
+
+
+/* ------------------- FOOTER ------------------- */
+footer {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: 30px 0;
+    text-align: center;
+    border-top: 1px solid #e0e0e0; 
+}
+
+footer .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+footer nav ul {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+footer nav ul li a {
+    color: var(--color-light);
+    font-size: 0.9rem;
+}
+footer nav ul li a:hover {
+    color: var(--color-accent);
+}
+
+.social-links a {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: var(--color-light);
+}
+.social-links a:hover {
+    color: var(--color-accent);
+}
+
+/* ------------------- MEDIA QUERIES (RESPONSIVE) ------------------- */
+
+@media (max-width: 1024px) {
+    h1 { font-size: 3rem; }
+    .hero-section { min-height: 500px; }
+}
+
+@media (max-width: 900px) {
+    /* 1. HEADER Móvil */
+    .menu-toggle { display: block; }
+    .cta-button { margin-left: auto; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh; 
+        background-color: var(--color-dark); 
+        flex-direction: column; 
+        justify-content: center; 
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-in-out;
+        z-index: 999;
+    }
+    
+    .nav-links.active {
+        transform: translateX(0); 
+    }
+    
+    .nav-links li a {
+        font-size: 1.5rem;
+        color: var(--color-light); 
+        padding: 10px 0;
+    }
+
+    /* 2. Footer Móvil */
+    footer .container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.5rem; }
+    h2 { font-size: 2rem; }
+    .hero-section { min-height: 400px; }
+    
+    .testimonials-section blockquote {
+        font-size: 1.2rem;
+        text-align: center;
+        border-left: none;
+        padding-left: 0;
+    }
+}

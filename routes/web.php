@@ -16,6 +16,8 @@ use App\Http\Controllers\{
     FinancialReportController,
     MembershipPriceController,
     ActivityController,
+    PlanController,
+    FamilyGroupController,
     TestController
 };
 use App\Models\Member;
@@ -113,6 +115,10 @@ Route::middleware(['auth'])->group(function () {
         | Membresías & Pagos
         |--------------------------------------------------------------------------
         */
+      
+       Route::post('memberships/calculate-price', [MembershipController::class, 'calculatePrice'])
+    ->name('memberships.calculate_price');
+
         Route::resource('memberships', MembershipController::class);
         Route::resource('payments', PaymentController::class);
 
@@ -157,6 +163,12 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('membership-prices', MembershipPriceController::class)
             ->names('membership_prices');
 
+     
+      
+
+
+
+
         /*
         |--------------------------------------------------------------------------
         | Reportes financieros
@@ -176,6 +188,14 @@ Route::middleware(['auth'])->group(function () {
             Route::get('financial-reports/export/excel/{year}/{month}', 'exportExcel')
                 ->name('financial_reports.export.excel');
         });
+
+        
+        Route::resource('plans', PlanController::class);
+        // CRUD para Grupos Familiares y sus miembros
+        Route::post('family-groups/{familyGroup}/add-member', [FamilyGroupController::class, 'addMember'])
+    ->name('family_groups.add_member');
+        Route::resource('family-groups', FamilyGroupController::class);
+
     });
 
     /*

@@ -2,78 +2,79 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use App\Models\User;
-use App\Models\Member;
-use App\Models\Payment;
-use App\Models\Activity;
-use App\Models\MembershipPrice;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Carbon\Carbon;
 
 class Membership extends Model
 {
-    use HasFactory, SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'corpo_memberships';
 
     protected $fillable = [
         'member_id',
-        'membership_price_id',
+        'plan_id',
         'start_date',
         'end_date',
+        'plan_price_at_purchase',
+        'discount_applied',
+        'final_price',
         'status',
-        'total_amount',
-        'payment_method',
-        'notes',
         'created_by',
         'updated_by'
     ];
 
     protected $casts = [
         'start_date' => 'date',
-        'end_date' => 'date'
+        'end_date' => 'date',
+        'plan_price_at_purchase' => 'decimal:2',
+        'discount_applied' => 'decimal:2',
+        'final_price' => 'decimal:2',
     ];
 
-    /** Una membresía pertenece a un miembro */
-    public function member()
+    // --- Relaciones ---
+
+    public function member(): BelongsTo
     {
         return $this->belongsTo(Member::class, 'member_id');
     }
 
-    /** Una membresía tiene un tipo de precio */
-    public function price()
+    public function plan(): BelongsTo
     {
-        return $this->belongsTo(MembershipPrice::class, 'membership_price_id');
+        return $this->belongsTo(Plan::class, 'plan_id');
     }
-
-    /** Una membresía tiene muchos pagos */
-    public function payments()
+    
+    public function creator(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+    
+    // Relación con Pagos (La crearemos en el siguiente paso del módulo)
+    public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'membership_id');
     }
 
-    /** Actividad asociada (a través del precio) */
-    public function activity()
+    // --- Helpers / Accessors ---
+
+    /**
+     * Calcula el saldo pendiente (Precio Final - Total Pagado).
+     */
+    public function getBalanceAttribute(): float
     {
-        return $this->hasOneThrough(
-            Activity::class,
-            MembershipPrice::class,
-            'id',            // foreign key on MembershipPrice table
-            'id',            // foreign key on Activity table
-            'membership_price_id', // local key on Membership table
-            'activity_id'          // local key on MembershipPrice table
-        );
+        // Asumiendo que Payment tiene un campo 'amount'
+        $paid = $this->payments()->sum('amount');
+        return $this->final_price - $paid;
     }
 
-    /** Auditoría */
-    public function createdBy()
+    /**
+     * Verifica si la membresía está vencida.
+     */
+    public function getIsOverdueAttribute(): bool
     {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
-    public function updatedBy()
-    {
-        return $this->belongsTo(User::class, 'updated_by');
+        return $this->end_date < Carbon::today();
     }
 }

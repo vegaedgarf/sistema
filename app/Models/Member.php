@@ -13,6 +13,8 @@ use App\Models\Payment;
 use App\Models\HealthRecord;
 use App\Models\MedicalRecord;
 use App\Models\Activity;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Member extends Model
 {
@@ -92,6 +94,10 @@ class Member extends Model
                     ->withTimestamps();
     }
 
+
+
+
+
     /** Usuarios que crean/actualizan registros */
     public function createdBy()
     {
@@ -102,4 +108,24 @@ class Member extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+/**
+     * Obtiene TODOS los registros de membresía de grupo (el historial).
+     */
+    public function groupHistory(): HasMany
+    {
+        return $this->hasMany(FamilyGroupMembership::class, 'member_id')
+                    ->orderBy('start_date', 'desc');
+    }
+
+    /**
+     * Obtiene la membresía de grupo ACTIVA (donde end_date es NULL).
+     */
+    public function currentGroupMembership(): HasOne
+    {
+        return $this->hasOne(FamilyGroupMembership::class, 'member_id')
+                    ->whereNull('end_date');
+    }   
+
+
 }

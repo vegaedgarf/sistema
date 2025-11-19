@@ -24,8 +24,7 @@
                         <th>Nombre</th>
                         <th>Apellido</th>
                         <th>DNI</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
+                        <th>Grupo Familiar</th>
                         <th>Estado</th>
                         <th>Fecha Alta</th>
                         <th>Acciones</th>
@@ -35,34 +34,31 @@
                     @foreach($members as $member)
                         <tr>
                             <td>{{ $member->id }}</td>
-                            {{-- ✅ Usando first_name --}}
                             <td>{{ $member->first_name }}</td>
-                            {{-- ✅ Usando last_name --}}
                             <td>{{ $member->last_name }}</td>
                             <td>{{ $member->dni }}</td>
-                            <td>{{ $member->email }}</td>
-                            {{-- ✅ Usando phone --}}
-                            <td>{{ $member->phone }}</td>
+                            
+                           <td>
+                                @if($member->currentGroupMembership)
+                                    {{-- Usamos ?-> para evitar el crash si el grupo fue borrado --}}
+                                    <span class="badge bg-info text-dark">
+                                        {{ $member->currentGroupMembership->group?->name ?? 'Grupo Eliminado' }}
+                                    </span>
+                                @else
+                                    <span class="text-muted small">--</span>
+                                @endif
+                            </td>
+
                             <td>
-                                {{-- ✅ Usando status --}}
                                 <span class="badge bg-{{ $member->status === 'activo' ? 'success' : 'secondary' }}">
                                     {{ ucfirst($member->status) }}
                                 </span>
                             </td>
-                            {{-- ✅ Usando joined_at (con formateo Carbon directo) --}}
                             <td>{{ $member->joined_at->format('d/m/Y') }}</td>
                             <td>
-                                <a href="{{ route('members.show', $member) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i>ver</a>
-                                <a href="{{ route('members.edit', $member) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i>Editar</a>
-                               <form action="{{ route('members.destroy', $member) }}" method="POST" class="d-inline"
-                                    onsubmit="return confirm('¿Estás seguro de que quieres eliminar al miembro {{ $member->first_name }} {{ $member->last_name }}?');">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        <i class="bi bi-trash"></i>Eliminar
-                                    </button>
-                                </form>
-                            </td>
+                                <a href="{{ route('members.show', $member) }}" class="btn btn-sm btn-info text-white"><i class="bi bi-eye"></i> Ver</a>
+                                <a href="{{ route('members.edit', $member) }}" class="btn btn-sm btn-warning"><i class="bi bi-pencil"></i> Editar</a>
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>

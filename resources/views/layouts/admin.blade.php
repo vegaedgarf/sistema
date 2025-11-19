@@ -50,6 +50,25 @@
                     <i class="fa fa-address-book me-2"></i> <span>Contactos</span>
                 </a>
             </li>
+              
+              <li>
+                    <a href="{{ route('plans.index') }}" class="nav-link small {{ request()->is('plans*') ? 'active' : '' }}">
+                    <i class="fa fa-tags me-2"></i> Planes y Precios
+                    </a>
+              </li>
+
+                <li>
+                    <a href="{{ route('membership_prices.index') }}" class="nav-link small">
+                        <i class="fa fa-tags me-2"></i> Precios por Actividad
+                    </a>
+                </li>
+
+                   <li>
+                    <a href="{{ route('family-groups.index') }}" class="nav-link small {{ request()->is('family-groups*') ? 'active' : '' }}">
+                        <i class="fa fa-users-rectangle me-2"></i> Grupos Familiares
+                    </a>
+                </li>
+
 
             @role('admin')
             <li class="nav-item mt-2">
@@ -87,12 +106,15 @@
                         <i class="fa fa-id-card me-2"></i> Membresías
                     </a>
                 </li> 
-                
-                <li>
-                    <a href="{{ route('membership_prices.index') }}" class="nav-link small">
-                        <i class="fa fa-tags me-2"></i> Precios por Actividad
-                    </a>
-                </li>
+
+
+              
+             
+
+
+
+
+             
 
                 <li>
                     <a href="{{ route('activities.index') }}" class="nav-link small">
@@ -204,7 +226,9 @@
 
     </script>
 
+
 @stack('scripts')
+@vite(['resources/js/app.js'])
 
 </body>
 </html>
